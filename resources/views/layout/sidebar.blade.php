@@ -65,14 +65,15 @@
             <span>OPLANG</span></a>
         </li>
         @endif
+        
+        @if (session('id_user') == 28 || session('profil') == 4)
+          <li class="nav-item">
+            <a class="nav-link" href="{{ url('wo') }}">
+              <i class="fas fa-fw fa-table"></i>
+              <span>Share WO OBC</span></a>
+          </li>
+        @endif
         @if (session('profil') == 4)
-
-        <li class="nav-item">
-          <a class="nav-link" href="{{ url('wo') }}">
-            <i class="fas fa-fw fa-table"></i>
-            <span>Share WO OBC</span></a>
-        </li>
-
         <li class="nav-item">
           <a class="nav-link" href="{{ url('master/caring') }}">
             <i class="fas fa-fw fa-table"></i>

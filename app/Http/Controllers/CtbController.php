@@ -59,7 +59,7 @@ class CtbController extends Controller
     {
         $rules = [
             // 'nd_pots'        => 'required_with_all:nd_internet',
-            'nd_internet'    => 'required',
+            'nd_internet'    => 'required|unique:nd_internet',
             'nama_pelanggan' => 'required',
             'no_hp'          => 'required',
             'paket_terakhir' => 'required'

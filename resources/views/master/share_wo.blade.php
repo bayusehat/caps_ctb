@@ -12,12 +12,11 @@
         <h6 class="m-0 font-weight-bold text-primary">Form</h6>
     </div>
     <div class="card-body">
-        <div class="row">
+        <div class="row mb-3">
             <div class="col-sm-12 col-md-12 col-xl-12">
                 <a href="javascript:void(0)" class="btn btn-primary btn-sm float-right" onclick="getUnmappedWo()"><i class="fas fa-sync"></i> Refresh WO</a>
             </div>
         </div>
-        <hr>
         @if(session('success'))
             <div class="alert alert-success alert-dismissible fade show" role="alert">
                 <strong>Sukses!</strong> {{ Session::get('success')}}

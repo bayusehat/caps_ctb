@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use DB;
+use Validator;
 
 class ShareWoController extends Controller
 {
@@ -12,7 +13,7 @@ class ShareWoController extends Controller
         $data = [
             'title' => 'Pembagian WO Call OBC',
             'content' => 'master.share_wo',
-            'user_obc' => DB::select("SELECT * FROM ctb_user WHERE profil = 1")
+            'user_obc' => DB::select("SELECT * FROM ctb_user WHERE profil = 1 and deleted = 0")
         ];
 
         return view('layout.index',['data' => $data]);
@@ -45,8 +46,9 @@ class ShareWoController extends Controller
                             IN 
                         (SELECT ID 
                             FROM CTB_FORM 
-                            WHERE TGL_CALL IS NULL
-                            LIMIT $jumlah");
+                            WHERE USER_OBC IS NULL AND TGL_CALL IS NULL
+                            AND DELETED = 0
+                            LIMIT $jumlah)");
 
             if($query){
                 $data = [
@@ -68,7 +70,7 @@ class ShareWoController extends Controller
     {
         $query = DB::select("SELECT COUNT(*) TOTAL_WO,
         SUM(CASE WHEN TGL_CALL IS NOT NULL THEN 1 ELSE 0 END) TOTAL_CALL,
-        COUNT(*) - SUM(CASE WHEN TGL_CALL IS NOT NULL THEN 1 ELSE 0 END) NOT_CALLED
+        SUM(CASE WHEN TGL_CALL IS NULL AND USER_OBC IS NULL THEN 1 ELSE 0 END) NOT_CALLED
         FROM CTB_FORM WHERE DELETED = 0 AND USER_CTB != 'ctb_admin' ORDER BY TOTAL_WO DESC");
 
         return response($query);
