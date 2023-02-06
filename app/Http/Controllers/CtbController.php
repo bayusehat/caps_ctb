@@ -59,7 +59,7 @@ class CtbController extends Controller
     {
         $rules = [
             // 'nd_pots'        => 'required_with_all:nd_internet',
-            'nd_internet'    => 'required|unique:nd_internet',
+            'nd_internet'    => 'required',
             'nama_pelanggan' => 'required',
             'no_hp'          => 'required',
             'paket_terakhir' => 'required'
@@ -163,7 +163,7 @@ class CtbController extends Controller
     public function auto_fill(Request $request)
     {
         $data = $request->input('nd_internet');
-        $query = DB::select("SELECT * from lis_r5_master a left join lis_r5_details b on a.nd_internet = b.nd_internet WHERE a.nd_internet LIKE '%$data%' order by periode desc");
+        $query = DB::select("select * from lis_r5_current where nd_internet = '$data'");
 
         if($query){
             $data = [
