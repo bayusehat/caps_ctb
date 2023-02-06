@@ -34,18 +34,30 @@
             </div>
         @endif
             
-        <table class="table table-striped table-bordered table-sm">
+        <table class="table table-striped table-bordered table-sm mb-3">
             <thead>
                 <tr>
                     <th>Desc</th>
                     <th>Unmapped WO</th>
+                    <th>Total WO Today</th>
                 </tr>
             </thead>
             <tbody id="tableWo">
 
             </tbody>
         </table>
-        <br>
+        <table class="table table-striped table-bordered table-sm mb-3">
+            <thead>
+                <tr>
+                    <th>User</th>
+                    <th>Mapped WO</th>
+                </tr>
+            </thead>
+            <tbody id="tableMappedWo">
+
+            </tbody>
+        </table>
+        
         <form action="" method="post" id="form">
             @csrf
             <div class="row">
@@ -71,6 +83,7 @@
 <script>
     $(document).ready(function(){
         getUnmappedWo();
+        getMappedWo();
     })
     function getUnmappedWo(){
         $.ajax({
@@ -89,6 +102,7 @@
                     row += '<tr>'+
                             '<td>No Plot WO</td>'+
                             '<td>'+val.not_called+'</td>'+
+                            '<td>'+val.total_wo+'</td>'+
                       '</tr>';
                 })
                 
@@ -97,8 +111,32 @@
         })
     }
 
+    function getMappedWo(){
+        $.ajax({
+            url : "{{ url('wo/mapped') }}",
+            method: 'GET',
+            dataType : 'JSON',
+            beforeSend:function(){
+                $('#tableMappedWo').loading();
+            },
+            complete:function(){
+                $('#tableMappedWo').loading('stop');
+            },
+            success:function(res){
+                var row = '';
+                $.each(res,function(i,val){
+                    row += '<tr>'+
+                            '<td>'+val.user_obc+'</td>'+
+                            '<td>'+val.mapped+'</td>'+
+                      '</tr>';
+                })
+                
+                $("#tableMappedWo").html(row);
+            }
+        })
+    }
+
     function runShareWo(){
-        var formData = $('#form').serialize();
         $.ajax({
             url : "{{ url('wo/share') }}",
             method : 'POST',
@@ -106,7 +144,10 @@
                 'X-CSRF-TOKEN' : $('meta[name=csrf-token]').attr('content')
             },
             dataType : 'JSON',
-            data : formData,
+            data : {
+                user_obc : $("#user_obc").val(),
+                jumlah : $("#jumlah").val()
+            },
             beforeSend:function(){
                 $('body').loading();
             },

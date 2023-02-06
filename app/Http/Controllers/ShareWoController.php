@@ -48,6 +48,7 @@ class ShareWoController extends Controller
                             FROM CTB_FORM 
                             WHERE USER_OBC IS NULL AND TGL_CALL IS NULL
                             AND DELETED = 0
+                            ORDER BY ID
                             LIMIT $jumlah)");
 
             if($query){
@@ -68,10 +69,21 @@ class ShareWoController extends Controller
 
     public function get_unmapped_wo()
     {
-        $query = DB::select("SELECT COUNT(*) TOTAL_WO,
+        $query = DB::select("SELECT SUM(CASE WHEN CAST(CREATED AS DATE) = CAST(NOW() AS DATE) THEN 1 ELSE 0 END) TOTAL_WO,
         SUM(CASE WHEN TGL_CALL IS NOT NULL THEN 1 ELSE 0 END) TOTAL_CALL,
         SUM(CASE WHEN TGL_CALL IS NULL AND USER_OBC IS NULL THEN 1 ELSE 0 END) NOT_CALLED
         FROM CTB_FORM WHERE DELETED = 0 AND USER_CTB != 'ctb_admin' ORDER BY TOTAL_WO DESC");
+
+        return response($query);
+    }
+
+    public function get_mapped_wo(){
+        $query = DB::select("select user_obc, sum(case when user_obc is not null then 1 else 0 end) mapped
+        from(
+        select * from ctb_form where user_obc is not null and tgl_call is null
+        ) a 
+        group by user_obc
+        order by user_obc;");
 
         return response($query);
     }

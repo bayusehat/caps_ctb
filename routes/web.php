@@ -68,6 +68,7 @@ Route::group(['middleware' => ['AuthLogin','web']],function(){
     Route::get('report/obc/dowload','ReportController@downloadObcReport');
     Route::get('wo','ShareWoController@index');
     Route::get('wo/unmapped','ShareWoController@get_unmapped_wo');
+    Route::get('wo/mapped','ShareWoController@get_mapped_wo');
     Route::post('wo/share','ShareWoController@add_wo_to_obc');
 
     Route::get('prepaid','PrepaidController@index');
