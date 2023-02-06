@@ -14,7 +14,7 @@
     <div class="card-body">
         <div class="row mb-3">
             <div class="col-sm-12 col-md-12 col-xl-12">
-                <a href="javascript:void(0)" class="btn btn-primary btn-sm float-right" onclick="getUnmappedWo()"><i class="fas fa-sync"></i> Refresh WO</a>
+                <a href="javascript:void(0)" class="btn btn-primary btn-sm float-right" onclick="refreshAll()"><i class="fas fa-sync"></i> Refresh WO</a>
             </div>
         </div>
         @if(session('success'))
@@ -82,9 +82,14 @@
 
 <script>
     $(document).ready(function(){
+       refreshAll()
+    })
+
+    function refreshAll(){
         getUnmappedWo();
         getMappedWo();
-    })
+    }
+    
     function getUnmappedWo(){
         $.ajax({
             url : "{{ url('wo/unmapped') }}",
