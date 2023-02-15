@@ -45,7 +45,7 @@
                             <div class="card-body">
                                 <div class="form-group">
                                     <label for="nd_pots"><strong>HASIL CARING :</strong></label>
-                                    <select name="hasil_caring" id="hasil_caring">
+                                    <select name="hasil_caring" id="hasil_caring" class="select2 form-control">
                                         <option value="">-- Pilih Hasil Caring --</option>
                                         @foreach ($hasil_caring as $hc)
                                             <option value="{{ $hc->id_hasil_caring }}" 
@@ -104,6 +104,21 @@
                             <option value="3" <?php if($ctb[0]->hasil_mc == 3){echo 'selected';}else{echo '';}?>>GAGAL</option>
                         </select>
                         @error('hasil_mc') <small class="text-danger">{{ $message }}</small> @enderror
+                    </div>
+                    <div class="form-group">
+                        <label for="nd_pots">REASON MC</label>
+                        <select name="reason_mc" id="reason_mc" class="select2 form-control">
+                            <option value="">Pilih Reason</option>
+                            @foreach ($reason as $r)
+                                <option value="{{ $r->id_reason }}"
+                                    @if ($r->id_reason == $ctb[0]->reason_mc)
+                                        {{ 'selected' }}
+                                    @else
+                                        {{ '' }}
+                                    @endif>{{ $r->reason }}</option>
+                            @endforeach
+                        </select>
+                        @error('reason_mc') <small class="text-danger">{{ $message }}</small> @enderror
                     </div>
                     <div class="form-group">
                         <label for="nd_pots">NOMOR PERMINTAAN :</label>

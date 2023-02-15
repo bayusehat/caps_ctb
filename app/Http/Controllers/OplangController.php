@@ -165,7 +165,8 @@ class OplangController extends Controller
             'title' => 'Edit data CTB setelah Call',
             'content' => 'oplang.oplang_create',
             'ctb' => DB::select('SELECT A.*,B.HASIL_CARING FROM CTB_FORM a LEFT JOIN CTB_HASIL_CARING B ON A.HASIL_CALL = B.ID_HASIL_CARING WHERE ID = '.$id),
-            'hasil_caring' => DB::select('SELECT * FROM CTB_HASIL_CARING WHERE DELETED = 0')
+            'hasil_caring' => DB::select('SELECT * FROM CTB_HASIL_CARING WHERE DELETED = 0'),
+            'reason' => DB::select('SELECT * FROM CTB_REASON')
         ];
         
         return view('layout.index',['data' => $data]);
@@ -175,7 +176,8 @@ class OplangController extends Controller
     {
         $rules = [
             'hasil_mc' => 'required',
-            'hasil_caring' => 'required'
+            'hasil_caring' => 'required',
+            'reason_mc' => 'required'
         ];
 
         $isValid = Validator::make($request->all(),$rules);
@@ -194,6 +196,7 @@ class OplangController extends Controller
                 'hasil_mc' => $request->input('hasil_mc'),
                 'nomor_permintaan' => $request->input('nomor_permintaan'),
                 'keterangan_mc' => $request->input('keterangan_mc'),
+                'reason_mc' => $request->input('reason_mc'),
                 'tgl_mc' => date('Y-m-d H:i:s'),
                 'user_obc' => $user_obc,
                 'user_oplang' => session('username'),
