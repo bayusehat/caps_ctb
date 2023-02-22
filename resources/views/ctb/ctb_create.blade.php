@@ -37,6 +37,11 @@
                             @error('nd_internet') <small class="text-danger">{{ $message }}</small> @enderror
                         </div>
                         <div class="form-group">
+                            <label for="nd_pots">TGL PSB</label>
+                            <input type="text" name="tgl_psb" id="tgl_psb" class="form-control">
+                            @error('tgl_psb') <small class="text-danger">{{ $message }}</small> @enderror
+                        </div>
+                        <div class="form-group">
                             <label for="nd_pots">ND POTS</label>
                             <input type="text" name="nd_pots" id="nd_pots" class="form-control">
                             @error('nd_pots') <small class="text-danger">{{ $message }}</small> @enderror
@@ -124,6 +129,7 @@
                         if(res.status == 200){
                             if(el.val().length == res.nd_internet.length){
                                 $('#paket_terakhir').val(res.paket_terakhir);
+                                $('#tgl_psb').val(res.tgl_psb);
                                 $('#notifError').text("");
                             }else{
                                 $('#notifError').text("");

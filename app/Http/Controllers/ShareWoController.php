@@ -80,7 +80,7 @@ class ShareWoController extends Controller
     public function get_mapped_wo(){
         $query = DB::select("select user_obc, sum(case when user_obc is not null then 1 else 0 end) mapped
         from(
-        select * from ctb_form where user_obc is not null and tgl_call is null
+        select * from ctb_form where user_obc is not null and tgl_call is null and deleted = 0
         ) a 
         group by user_obc
         order by user_obc;");

@@ -80,6 +80,7 @@ class CtbController extends Controller
                 'keterangan_ctb' => $request->input('keterangan_ctb'),
                 'no_ktp'         => $request->input('no_ktp'),
                 'periode'        => date('Ym'),
+                'tgl_psb'        => $request->input('tgl_psb'),
                 'user_ctb'       => session('username'),
                 'nama_bank'      => $request->input('nama_bank'),
                 'no_rekening'    => $request->input('no_rekening'),
@@ -170,6 +171,7 @@ class CtbController extends Controller
                 'status'         => 200,
                 'nd_internet'    => $query[0]->nd_internet,
                 'paket_terakhir' => $query[0]->desc_pack_inet,
+                'tgl_psb'        => $query[0]->tgl_psb,
                 'message' => 'Paket tersedia!'
             ];
         }else{
