@@ -38,7 +38,7 @@ class OplangController extends Controller
             $acuan = date('Ymd',strtotime('2020-11-05'));
             if($c->tgl_psb != NULL){ 
                 $st_tsb = '<label class="badge badge-secondary">'.date('d/m/Y H:i',strtotime($c->tgl_psb)).'</label><br>';
-                if($tanggal > $acuan){
+                if($this->calculateYear($tanggal) < 1){
                     $st_tsb = '<label class="badge badge-danger">(001) Denda pengakhiran berlaku</label>';
                 }else{
                     $st_tsb = '<label class="badge badge-primary">(002) Denda pengakhiran tidak berlaku</label>';
@@ -212,5 +212,17 @@ class OplangController extends Controller
                 return redirect()->back()->with('error','Data CTB hasil mc gagal ditambahkan');
             }
         }
+    }
+
+    public function calculateYear($tgl_psb)
+    {
+        $date1 = $tgl_psb;
+        $date2 = date('Y-m-d');
+
+        $diff = abs(strtotime($date2) - strtotime($date1));
+
+        $years = floor($diff / (365*60*60*24));
+
+        return $years;
     }
 }

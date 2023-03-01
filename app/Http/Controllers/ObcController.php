@@ -36,13 +36,13 @@ class ObcController extends Controller
             }else{
                 $tcall = '<label class="badge badge-success">Terupdate hasil call by : '.$c->user_obc.'</label>';
             }
-            $tgl_lis = $c->tgl_psb != null ? date('d/m/Y H:i',strtotime($c->tgl_psb)) : '-';
+            $tgl_lis = $c->tgl_psb != null ? date('d/m/Y',strtotime($c->tgl_psb)) : '-';
 
             $tanggal = date('Ymd',strtotime($c->tgl_psb));
             $acuan = date('Ymd',strtotime('2020-11-05'));
             if($c->tgl_psb != NULL){ 
                 $stts = '<label class="badge badge-secondary">'.date('d/m/Y H:i',strtotime($c->tgl_psb)).'</label><br>';
-                if($tanggal > $acuan){
+                if($this->calculateYear($c->tgl_psb) < 1){
                     $stts = '<label class="badge badge-danger">(001) Denda pengakhiran berlaku</label>';
                 }else{
                     $stts = '<label class="badge badge-primary">(002) Denda pengakhiran tidak berlaku</label>';
@@ -150,5 +150,17 @@ class ObcController extends Controller
                 return redirect()->back()->with('error','Data CTB hasil call gagal ditambahkan');
             }
         }
+    }
+
+    public function calculateYear($tgl_psb)
+    {
+        $date1 = $tgl_psb;
+        $date2 = date('Y-m-d');
+
+        $diff = abs(strtotime($date2) - strtotime($date1));
+
+        $years = floor($diff / (365*60*60*24));
+
+        return $years;
     }
 }
