@@ -1,10 +1,4 @@
-<style>
-    .border-bottom{
-        border: none;
-        border-bottom : 1px solid grey;
-        padding: 0;
-    }
-</style>
+
 <h1 class="h3 mb-2 text-gray-800">Update Data CTB setelah Call OBC</h1>
 <!-- DataTales Example -->
 <div class="card shadow mb-4">
