@@ -33,7 +33,7 @@ class OplangController extends Controller
             }else{
                 $st_mc = '<label class="badge badge-success">Terupdate hasil mc by : '.$c->user_oplang.'</label>';
             }
-            $tgl_lis = $c->tgl_psb != null ? date('d/m/Y H:i',strtotime($c->tgl_psb)) : '-'; 
+            $tgl_lis = $c->tgl_psb != null ? date('d/m/Y',strtotime($c->tgl_psb)) : '-'; 
             $tanggal = date('Ymd',strtotime($c->tgl_psb));
             $acuan = date('Ymd',strtotime('2020-11-05'));
             if($c->tgl_psb != NULL){ 

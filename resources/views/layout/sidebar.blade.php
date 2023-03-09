@@ -44,24 +44,24 @@
         <!-- Nav Item - Tables -->
         <li class="nav-item">
           <a class="nav-link" href="{{ url('obc') }}">
-            <i class="fas fa-fw fa-table"></i>
+            <i class="fas fa-fw fa-phone"></i>
             <span>OBC</span></a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="{{ url('prepaid') }}">
-            <i class="fas fa-fw fa-table"></i>
+            <i class="fas fa-fw fa-phone-volume"></i>
             <span>Indihome Prepaid</span></a>
         </li>
         @endif
         <li class="nav-item">
           <a class="nav-link" href="{{ url('hvc') }}">
-            <i class="fas fa-fw fa-table"></i>
+            <i class="fas fa-fw fa-check"></i>
             <span>HVC Caps List</span></a>
         </li>
         @if (session('profil') == 3 || session('profil') == 4)
         <li class="nav-item">
           <a class="nav-link" href="{{ url('oplang') }}">
-            <i class="fas fa-fw fa-table"></i>
+            <i class="fas fa-fw fa-users"></i>
             <span>OPLANG</span></a>
         </li>
         @endif
@@ -69,26 +69,26 @@
         @if (session('id_user') == 28 || session('profil') == 4)
           <li class="nav-item">
             <a class="nav-link" href="{{ url('wo') }}">
-              <i class="fas fa-fw fa-table"></i>
+              <i class="fas fa-fw fa-list"></i>
               <span>Share WO OBC</span></a>
           </li>
         @endif
         @if (session('profil') == 4)
         <li class="nav-item">
           <a class="nav-link" href="{{ url('master/caring') }}">
-            <i class="fas fa-fw fa-table"></i>
+            <i class="fas fa-fw fa-address-card"></i>
             <span>Master Hasil Caring</span></a>
         </li>
 
         <li class="nav-item">
           <a class="nav-link" href="{{ url('voc') }}">
-            <i class="fas fa-fw fa-table"></i>
+            <i class="fas fa-fw fa-bullhorn"></i>
             <span>Master VOC</span></a>
         </li>
 
         <li class="nav-item">
           <a class="nav-link" href="{{ url('user') }}">
-            <i class="fas fa-fw fa-table"></i>
+            <i class="fas fa-fw fa-user"></i>
             <span>Master User</span></a>
         </li>
         @endif
