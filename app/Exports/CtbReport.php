@@ -78,8 +78,11 @@ class CtbReport implements FromCollection,WithHeadings
                 WHEN HASIL_MC = 2 THEN 'ANOMALI' 
                 WHEN HASIL_MC = 3 THEN 'GAGAL'
             END HASIL_MC,
-            KETERANGAN_MC,USER_OPLANG
-            FROM ctb_form A LEFT JOIN CTB_HASIL_CARING B ON A.HASIL_CALL = B.ID_HASIL_CARING WHERE $inquery AND $rangetgl AND A.DELETED = 0
+            KETERANGAN_MC,USER_OPLANG, REASON
+            FROM ctb_form A 
+                LEFT JOIN CTB_HASIL_CARING B ON A.HASIL_CALL = B.ID_HASIL_CARING
+                LEFT JOIN CTB_REASON C ON A.REASON_MC = C.ID_REASON
+                WHERE $inquery AND $rangetgl AND A.DELETED = 0
             "));
 
         return collect($query);
@@ -106,7 +109,8 @@ class CtbReport implements FromCollection,WithHeadings
             'TGL. MC',
             'HASIL MC',
             'KETERANGAN MC',
-            'USER OPLANG'
+            'USER OPLANG',
+            'REASON'
         ];
     }
 }
